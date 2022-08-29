@@ -1,6 +1,6 @@
 {
-    "name": "@kazunori-kimura/react-awesome-table",
-    "version": "0.6.7",
+    "name": "@tk42/react-awesome-table",
+    "version": "0.1.0",
     "description": "JSON配列をいい感じにテーブル表示する React Component",
     "main": "build/index.js",
     "module": "build/index.es.js",
@@ -29,7 +29,7 @@
         "prepublishOnly": "npm run build"
     },
     "keywords": [],
-    "author": "kazunori-kimura",
+    "author": "tk42",
     "license": "MIT",
     "devDependencies": {
         "@babel/core": "^7.16.0",
@@ -99,10 +99,10 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Kazunori-Kimura/react-awesome-table.git"
+        "url": "git+https://github.com/tk42/react-awesome-table.git"
     },
     "bugs": {
-        "url": "https://github.com/Kazunori-Kimura/react-awesome-table/issues"
+        "url": "https://github.com/tk42/react-awesome-table/issues"
     },
-    "homepage": "https://github.com/Kazunori-Kimura/react-awesome-table#readme"
+    "homepage": "https://github.com/tk42/react-awesome-table#readme"
 }
