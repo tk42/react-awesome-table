@@ -8,7 +8,7 @@ import React, {
     useLayoutEffect,
     useMemo,
     useRef,
-    useState,
+    useState
 } from 'react';
 import { CellSize } from './consts';
 import Container from './Container';
@@ -297,7 +297,7 @@ function TableComponent<T>(
                                                         return undefined;
                                                     }
 
-                                                    const key = `awesome-table-body-${cell.entityName}-${rowIndex}-${colIndex}`;
+                                                    const key = `awesome-table-body-${String(cell.entityName)}-${rowIndex}-${colIndex}`;
                                                     const column = columns.find(
                                                         (c) => c.name === cell.entityName
                                                     );

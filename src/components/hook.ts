@@ -1431,7 +1431,7 @@ export const useTable = <T>({
             data?.filter((row) => {
                 if (filter) {
                     return columns.every((column) => {
-                        const filterText = filter[`${column.name}`];
+                        const filterText = filter[`${String(column.name)}`];
                         if (filterText) {
                             const cell = row.find((e) => e.entityName === column.name);
                             if (cell) {
@@ -1531,8 +1531,8 @@ export const useTable = <T>({
             const column = columns.find((c) => c.name === name);
             return {
                 filterable: settings.filterable && (column.filterable ?? true),
-                name: `${name}`,
-                value: filter ? filter[`${name}`] ?? '' : '',
+                name: `${String(name)}`,
+                value: filter ? filter[`${String(name)}`] ?? '' : '',
                 onChange: onChangeFilter,
             };
         },
@@ -1552,10 +1552,10 @@ export const useTable = <T>({
                 // 1. ソートボタンをクリックした順にソート順を保持する
                 //    同じボタンが複数クリックされた場合はまず該当ソート順を削除してから
                 //    先頭にソート順を登録する
-                const order = sort.find((e) => e.name === `${name}`)?.order;
-                const newSort: SortState[] = sort.filter((e) => e.name !== `${name}`);
+                const order = sort.find((e) => e.name === `${String(name)}`)?.order;
+                const newSort: SortState[] = sort.filter((e) => e.name !== `${String(name)}`);
                 newSort.unshift({
-                    name: `${name}`,
+                    name: `${String(name)}`,
                     order: order === 'desc' ? 'asc' : 'desc',
                 });
 
@@ -1597,7 +1597,7 @@ export const useTable = <T>({
             const column = columns.find((c) => c.name === name);
             return {
                 sortable: settings.sortable && (column.sortable ?? true),
-                order: sort.find((e) => e.name === `${name}`)?.order,
+                order: sort.find((e) => e.name === `${String(name)}`)?.order,
                 onClick: getSortButtonClickEventHandler(name),
             };
         },
@@ -2172,7 +2172,7 @@ export const useTable = <T>({
      */
     const selectByKeyValue = useCallback(
         (key: keyof T, value: string): boolean => {
-            debug(`selectByKeyValue: key=${key}, value=${value}`);
+            debug(`selectByKeyValue: key=${String(key)}, value=${value}`);
 
             // 編集を完了する
             const cells = clone(data);
