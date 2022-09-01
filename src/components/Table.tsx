@@ -10,7 +10,7 @@ import React, {
     useRef,
     useState
 } from 'react';
-import { CellSize } from './consts';
+import { CellSize, HeaderSize } from './consts';
 import Container from './Container';
 import ContextMenuPopover from './ContextMenuPopover';
 import Header from './Header';
@@ -60,7 +60,7 @@ const useStyles = makeStyles({
     },
     rowHeaderCell: {
         boxSizing: 'border-box',
-        width: '2.8rem',
+        width: HeaderSize.DefaultWidth,
         fontWeight: 'lighter',
         fontSize: '0.7rem',
         color: '#666',

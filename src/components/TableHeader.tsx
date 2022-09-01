@@ -2,6 +2,7 @@ import { makeStyles } from '@material-ui/core';
 import classnames from 'classnames';
 import React from 'react';
 import ColumnHeader from './ColumnHeader';
+import { HeaderSize } from './consts';
 import {
     ColumnDefinition,
     ColumnHeaderProps,
@@ -22,7 +23,8 @@ interface Props<T> {
 
 const useStyles = makeStyles((theme) => ({
     headerRow: {
-        //
+        display: 'contents',
+        position: 'fixed',
     },
     headerCell: {
         borderBottomWidth: 1,
@@ -36,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     },
     rowHeaderCell: {
         boxSizing: 'border-box',
-        width: '1.4rem',
+        minWidth: HeaderSize.DefaultWidth,
     },
     stickyRowHeaderCell: {
         position: 'sticky',
