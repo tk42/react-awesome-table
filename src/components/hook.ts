@@ -1335,11 +1335,14 @@ export const useTable = <T>({
 
                 let defaultPrevent = false;
 
-                if (['delete', 'backspace', 'clear'].includes(key.toLowerCase())) {
+                if ('enter' === key.toLowerCase()) {
+                    // 入力モードで編集開始
+                    startEditing(currentCell, data[currentCell.row][currentCell.column].value);
+                } else if (['delete', 'backspace', 'clear'].includes(key.toLowerCase())) {
                     if (selection.length > 1) {
                         clearSelectedCells();
                     } else {
-                        // 入力モードで編集開始
+                        // 入力モードで削除 & 編集開始
                         startEditing(currentCell, '');
                     }
                     defaultPrevent = true;
@@ -1355,7 +1358,7 @@ export const useTable = <T>({
                 }
             }
         },
-        [clearSelectedCells, currentCell, editCell, focus, selection.length, startEditing]
+        [clearSelectedCells, currentCell, editCell, focus, data, selection.length, startEditing]
     );
 
     /**
