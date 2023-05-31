@@ -3,6 +3,10 @@ export declare enum MouseButton {
     Center = 1,
     Second = 2
 }
+interface HeaderSizeDefinition {
+    DefaultWidth: string;
+}
+export declare const HeaderSize: Readonly<HeaderSizeDefinition>;
 interface CellSizeDefinition {
     DefaultWidth: number;
     MinHeight: number;

@@ -11,18 +11,16 @@ import {
     useState,
 } from 'react';
 import { MouseButton } from './consts';
-import { formatMessage, MessageContext } from './providers/MessageProvider';
+import { MessageContext, formatMessage } from './providers/MessageProvider';
 import {
     Cell,
     CellLocation,
     CellRange,
-    defaultTableOptions,
     Direction,
     EditMode,
     EditorKeyDownAction,
     EditorProps,
     FilterProps,
-    getCellComponentType,
     HistoryCommand,
     HotkeyProps,
     RowHeaderCellProps,
@@ -32,6 +30,8 @@ import {
     TableHookParameters,
     TableHookReturns,
     TableOptions,
+    defaultTableOptions,
+    getCellComponentType,
 } from './types';
 import {
     clearSelection,
@@ -485,7 +485,9 @@ export const useTable = <T>({
         if (typeof prevItems === 'undefined' || prevItems !== rawItems) {
             const newData: TableData<T> = items.map((item, rowIndex) => {
                 return columns.map((column) => {
-                    const value = column.getValue(item);
+                    const value = column.hasOwnProperty('getValue')
+                        ? column.getValue(item)
+                        : item[column.name].toString();
 
                     const cell: Cell<T> = {
                         entityName: column.name,
@@ -1335,11 +1337,14 @@ export const useTable = <T>({
 
                 let defaultPrevent = false;
 
-                if (['delete', 'backspace', 'clear'].includes(key.toLowerCase())) {
+                if ('enter' === key.toLowerCase()) {
+                    // 入力モードで編集開始
+                    startEditing(currentCell, data[currentCell.row][currentCell.column].value);
+                } else if (['delete', 'backspace', 'clear'].includes(key.toLowerCase())) {
                     if (selection.length > 1) {
                         clearSelectedCells();
                     } else {
-                        // 入力モードで編集開始
+                        // 入力モードで削除 & 編集開始
                         startEditing(currentCell, '');
                     }
                     defaultPrevent = true;
@@ -1355,7 +1360,7 @@ export const useTable = <T>({
                 }
             }
         },
-        [clearSelectedCells, currentCell, editCell, focus, selection.length, startEditing]
+        [clearSelectedCells, currentCell, editCell, focus, data, selection.length, startEditing]
     );
 
     /**

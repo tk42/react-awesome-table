@@ -10,17 +10,17 @@ import React, {
     useRef,
     useState,
 } from 'react';
-import { CellSize } from './consts';
 import Container from './Container';
 import ContextMenuPopover from './ContextMenuPopover';
 import Header from './Header';
-import { useTable } from './hook';
 import Pagination from './Pagination';
+import TableCell from './TableCell';
+import TableHeader from './TableHeader';
+import { CellSize, HeaderSize } from './consts';
+import { useTable } from './hook';
 import MessageProvider from './providers/MessageProvider';
 import PopoverProvider from './providers/PopoverProvider';
 import StyleProvider from './providers/StyleProvider';
-import TableCell from './TableCell';
-import TableHeader from './TableHeader';
 import { CellLocation, PaginationProps, TableHandles, TableProps } from './types';
 
 const useStyles = makeStyles({
@@ -60,7 +60,7 @@ const useStyles = makeStyles({
     },
     rowHeaderCell: {
         boxSizing: 'border-box',
-        width: '2.8rem',
+        width: HeaderSize.DefaultWidth,
         fontWeight: 'lighter',
         fontSize: '0.7rem',
         color: '#666',

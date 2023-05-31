@@ -4,6 +4,14 @@ export enum MouseButton {
     Second,
 }
 
+interface HeaderSizeDefinition {
+    DefaultWidth: string;
+}
+
+export const HeaderSize: Readonly<HeaderSizeDefinition> = {
+    DefaultWidth: '2.8rem',
+};
+
 interface CellSizeDefinition {
     DefaultWidth: number;
     MinHeight: number;

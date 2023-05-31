@@ -5,31 +5,31 @@ export type MessageFunction = (params: Record<string, string>) => string;
 
 export const defaultMessages = {
     // header
-    addRow: '追加',
-    deleteRows: '削除',
+    addRow: '+',
+    deleteRows: '-',
     // hook
     deleteConfirm: ({ count }: { count: string }): string =>
-        `${count}件 のデータを削除します。よろしいですか？`,
+        `Delete ${count} row(s)`,
     // pagination
     'pagination.first': '<<',
     'pagination.prev': '<',
     'pagination.next': '>',
     'pagination.last': '>>',
     // sort
-    asc: '昇順',
-    desc: '降順',
+    asc: '↑',
+    desc: '↓',
     // フィルタ
-    filter: 'フィルタ',
+    filter: 'filter',
     // validate
-    'validate.required': '必須項目です',
-    'validate.numeric': '数値で入力してください',
+    'validate.required': 'Required field',
+    'validate.numeric': 'Numeric field',
     'validate.datalist': ({ list }: { list: string }): string =>
-        `${list}のいずれかを指定してください`,
-    'validate.unique': '値が重複しています',
+        `Specify among ${list}`,
+    'validate.unique': 'Duplicated field',
     // コピー＆ペースト
-    copy: 'コピー',
-    paste: '貼り付け',
-    select: '範囲選択',
+    copy: 'copy',
+    paste: 'paste',
+    select: 'select',
 };
 
 export type MessageDefinitions = Partial<

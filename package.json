@@ -1,6 +1,6 @@
 {
-    "name": "@kazunori-kimura/react-awesome-table",
-    "version": "0.7.0",
+    "name": "@tk42/react-awesome-table",
+    "version": "0.3.0",
     "description": "JSON配列をいい感じにテーブル表示する React Component",
     "main": "build/index.js",
     "module": "build/index.es.js",
@@ -29,10 +29,10 @@
         "prepublishOnly": "npm run build"
     },
     "keywords": [],
-    "author": "kazunori-kimura",
+    "author": "tk42",
     "license": "MIT",
     "devDependencies": {
-        "@babel/core": "^7.16.0",
+        "@babel/core": "^7.18.13",
         "@material-ui/core": "^4.12.3",
         "@rollup/plugin-commonjs": "^21.0.1",
         "@rollup/plugin-node-resolve": "^13.0.6",
@@ -67,12 +67,18 @@
         "rollup-plugin-peer-deps-external": "^2.2.4",
         "rollup-plugin-typescript2": "^0.31.0",
         "ts-jest": "^27.0.7",
-        "typescript": "^4.4.4"
+        "typescript": "^4.8.2"
     },
     "peerDependencies": {
         "@material-ui/core": "^4.12.3",
         "react": "^17.0.2",
         "react-dom": "^17.0.2"
+    },
+    "resolutions": {
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "@types/react": "^17.0.35",
+        "@types/react-dom": "^17.0.11"
     },
     "eslintConfig": {
         "parser": "@typescript-eslint/parser",
@@ -99,10 +105,10 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Kazunori-Kimura/react-awesome-table.git"
+        "url": "git+https://github.com/tk42/react-awesome-table.git"
     },
     "bugs": {
-        "url": "https://github.com/Kazunori-Kimura/react-awesome-table/issues"
+        "url": "https://github.com/tk42/react-awesome-table/issues"
     },
-    "homepage": "https://github.com/Kazunori-Kimura/react-awesome-table#readme"
+    "homepage": "https://github.com/tk42/react-awesome-table#readme"
 }
