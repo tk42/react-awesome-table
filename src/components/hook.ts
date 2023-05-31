@@ -8,21 +8,19 @@ import {
     useEffect,
     useMemo,
     useRef,
-    useState
+    useState,
 } from 'react';
 import { MouseButton } from './consts';
-import { formatMessage, MessageContext } from './providers/MessageProvider';
+import { MessageContext, formatMessage } from './providers/MessageProvider';
 import {
     Cell,
     CellLocation,
     CellRange,
-    defaultTableOptions,
     Direction,
     EditMode,
     EditorKeyDownAction,
     EditorProps,
     FilterProps,
-    getCellComponentType,
     HistoryCommand,
     HotkeyProps,
     RowHeaderCellProps,
@@ -31,7 +29,9 @@ import {
     TableData,
     TableHookParameters,
     TableHookReturns,
-    TableOptions
+    TableOptions,
+    defaultTableOptions,
+    getCellComponentType,
 } from './types';
 import {
     clearSelection,
@@ -49,7 +49,7 @@ import {
     safeGetCell,
     selectRange,
     withinCell,
-    withinRange
+    withinRange,
 } from './util';
 import { validateCell } from './validate';
 
@@ -485,7 +485,9 @@ export const useTable = <T>({
         if (typeof prevItems === 'undefined' || prevItems !== rawItems) {
             const newData: TableData<T> = items.map((item, rowIndex) => {
                 return columns.map((column) => {
-                    const value = column.hasOwnProperty("getValue") ? column.getValue(item) : item[column.name].toString();
+                    const value = column.hasOwnProperty('getValue')
+                        ? column.getValue(item)
+                        : item[column.name].toString();
 
                     const cell: Cell<T> = {
                         entityName: column.name,
@@ -1532,10 +1534,11 @@ export const useTable = <T>({
     const getFilterProps = useCallback(
         (name: keyof T): FilterProps => {
             const column = columns.find((c) => c.name === name);
+            const columnName = String(name);
             return {
                 filterable: settings.filterable && (column.filterable ?? true),
-                name: `${String(name)}`,
-                value: filter ? filter[`${String(name)}`] ?? '' : '',
+                name: columnName,
+                value: filter ? filter[columnName] ?? '' : '',
                 onChange: onChangeFilter,
             };
         },
@@ -1552,13 +1555,15 @@ export const useTable = <T>({
                     return;
                 }
 
+                const columnName = String(name);
+
                 // 1. ソートボタンをクリックした順にソート順を保持する
                 //    同じボタンが複数クリックされた場合はまず該当ソート順を削除してから
                 //    先頭にソート順を登録する
-                const order = sort.find((e) => e.name === `${String(name)}`)?.order;
-                const newSort: SortState[] = sort.filter((e) => e.name !== `${String(name)}`);
+                const order = sort.find((e) => e.name === columnName)?.order;
+                const newSort: SortState[] = sort.filter((e) => e.name !== columnName);
                 newSort.unshift({
-                    name: `${String(name)}`,
+                    name: columnName,
                     order: order === 'desc' ? 'asc' : 'desc',
                 });
 
@@ -1598,9 +1603,10 @@ export const useTable = <T>({
     const getSortProps = useCallback(
         (name: keyof T): SortProps => {
             const column = columns.find((c) => c.name === name);
+            const columnName = String(name);
             return {
                 sortable: settings.sortable && (column.sortable ?? true),
-                order: sort.find((e) => e.name === `${String(name)}`)?.order,
+                order: sort.find((e) => e.name === columnName)?.order,
                 onClick: getSortButtonClickEventHandler(name),
             };
         },
@@ -1911,6 +1917,8 @@ export const useTable = <T>({
                 keys.push('shift');
             } else if (event.ctrlKey) {
                 keys.push('ctrl');
+            } else if (event.metaKey) {
+                keys.push('command');
             }
 
             debug(`handleEditorKeyDown: ${event.key}`);
@@ -1978,7 +1986,7 @@ export const useTable = <T>({
                         } else {
                             keyDownArrow(key);
                         }
-                    } else if (key === "ctrl+enter") {
+                    } else if (key === 'ctrl+enter' || key === 'command+enter') {
                         editMultipleCells();
                     } else {
                         keyDownTabEnter(key);

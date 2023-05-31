@@ -8,19 +8,19 @@ import React, {
     useLayoutEffect,
     useMemo,
     useRef,
-    useState
+    useState,
 } from 'react';
-import { CellSize, HeaderSize } from './consts';
 import Container from './Container';
 import ContextMenuPopover from './ContextMenuPopover';
 import Header from './Header';
-import { useTable } from './hook';
 import Pagination from './Pagination';
+import TableCell from './TableCell';
+import TableHeader from './TableHeader';
+import { CellSize, HeaderSize } from './consts';
+import { useTable } from './hook';
 import MessageProvider from './providers/MessageProvider';
 import PopoverProvider from './providers/PopoverProvider';
 import StyleProvider from './providers/StyleProvider';
-import TableCell from './TableCell';
-import TableHeader from './TableHeader';
 import { CellLocation, PaginationProps, TableHandles, TableProps } from './types';
 
 const useStyles = makeStyles({
@@ -297,7 +297,9 @@ function TableComponent<T>(
                                                         return undefined;
                                                     }
 
-                                                    const key = `awesome-table-body-${String(cell.entityName)}-${rowIndex}-${colIndex}`;
+                                                    const key = `awesome-table-body-${String(
+                                                        cell.entityName
+                                                    )}-${rowIndex}-${colIndex}`;
                                                     const column = columns.find(
                                                         (c) => c.name === cell.entityName
                                                     );
